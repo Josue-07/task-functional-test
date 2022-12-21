@@ -6,11 +6,19 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class TasksTest {
 
+	WebDriver driver;
+	ChromeOptions options;
+	
+	
 	public WebDriver acessarAplicacao() {
-		WebDriver driver = new ChromeDriver();
+		options = new ChromeOptions();
+		options.setHeadless(true);
+		
+		driver = new ChromeDriver(options);
 		driver.navigate().to("http://localhost:8001/tasks/");
 		return driver;
 	}
@@ -18,7 +26,7 @@ public class TasksTest {
 	@Test
 	public void deveSalvarTarefeComSucesso() {
 
-		WebDriver driver = acessarAplicacao();
+		driver = acessarAplicacao();
 
 		driver.findElement(By.xpath("//*[contains(text(), 'Add Todo')]")).click();
 		driver.findElement(By.xpath("//input[@name='task']")).sendKeys("teste com selenium");
@@ -32,7 +40,7 @@ public class TasksTest {
 	@Test
 	public void naoDeveSalvarTarefeSemDescricao() {
 
-		WebDriver driver = acessarAplicacao();
+		driver = acessarAplicacao();
 
 		driver.findElement(By.xpath("//*[contains(text(), 'Add Todo')]")).click();
 		// driver.findElement(By.xpath("//input[@name='task']")).sendKeys("teste com
@@ -47,7 +55,7 @@ public class TasksTest {
 	@Test
 	public void naoDeveSalvarTarefeSemData() {
 
-		WebDriver driver = acessarAplicacao();
+		driver = acessarAplicacao();
 
 		driver.findElement(By.xpath("//*[contains(text(), 'Add Todo')]")).click();
 		driver.findElement(By.xpath("//input[@name='task']")).sendKeys("teste comselenium");
@@ -60,7 +68,7 @@ public class TasksTest {
 	@Test
 	public void naoDeveSalvarTarefaComDataPassada() {
 
-		WebDriver driver = acessarAplicacao();
+		driver = acessarAplicacao();
 
 		driver.findElement(By.xpath("//*[contains(text(), 'Add Todo')]")).click();
 		driver.findElement(By.xpath("//input[@name='task']")).sendKeys("teste comselenium");
